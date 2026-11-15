@@ -682,5 +682,10 @@ applySkin();resize();refreshMenu();requestAnimationFrame(frame);
 window.__glint={get S(){return S},get P(){return P},get E(){return E},get BL(){return BL},get save(){return save},get B(){return B},get U(){return U},tryDash,spawn,step,hurt,kill,ET,UPS};
 })();
 </script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})});
+}
+</script>
 </body>
 </html>
