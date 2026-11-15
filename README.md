@@ -23,34 +23,27 @@ There's no "move" button. You pick a direction, dash, and anything in your path 
 
 No login. No download. No ads. No energy timers. Just open it and go.
 
+### 📱 Mobile
+
 <table>
 <tr>
-<td width="50%">
+<td width="25%"><img src="screenshots/mobile-menu.png" width="100%" alt="GLINT start screen on mobile"><p align="center"><sub>Start screen</sub></p></td>
+<td width="25%"><img src="screenshots/mobile-gameplay.png" width="100%" alt="GLINT gameplay on mobile"><p align="center"><sub>In a run</sub></p></td>
+<td width="25%"><img src="screenshots/mobile-levelup.png" width="100%" alt="GLINT level-up screen on mobile"><p align="center"><sub>Level-up pick</sub></p></td>
+<td width="25%"><img src="screenshots/mobile-gameover.png" width="100%" alt="GLINT game-over screen on mobile"><p align="center"><sub>Run summary</sub></p></td>
+</tr>
+</table>
 
-**📱 On mobile**
-<img src="screenshots/menu.png" width="100%" alt="GLINT start screen on mobile">
+### 🖥️ Web / Desktop
 
-</td>
-<td width="50%">
-
-**⚡ Mid-combo chaos**
-<img src="screenshots/gameplay.png" width="100%" alt="GLINT gameplay with a high combo and screen full of enemies">
-
-</td>
+<table>
+<tr>
+<td width="50%"><img src="screenshots/desktop-menu.png" width="100%" alt="GLINT start screen on desktop"><p align="center"><sub>Start screen</sub></p></td>
+<td width="50%"><img src="screenshots/desktop-gameplay.png" width="100%" alt="GLINT gameplay on desktop with a high combo and screen full of enemies"><p align="center"><sub>Mid-combo chaos</sub></p></td>
 </tr>
 <tr>
-<td width="50%">
-
-**⬆️ Level-up picks**
-<img src="screenshots/levelup.png" width="100%" alt="GLINT level-up screen offering three upgrade choices">
-
-</td>
-<td width="50%">
-
-**💀 Run summary**
-<img src="screenshots/gameover.png" width="100%" alt="GLINT game-over screen showing final score and a new best">
-
-</td>
+<td width="50%"><img src="screenshots/desktop-levelup.png" width="100%" alt="GLINT level-up screen on desktop offering three upgrade choices"><p align="center"><sub>Level-up pick</sub></p></td>
+<td width="50%"><img src="screenshots/desktop-gameover.png" width="100%" alt="GLINT game-over screen on desktop showing final score and a new best"><p align="center"><sub>Run summary</sub></p></td>
 </tr>
 </table>
 
