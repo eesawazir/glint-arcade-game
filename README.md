@@ -27,10 +27,10 @@ No login. No download. No ads. No energy timers. Just open it and go.
 
 <table>
 <tr>
-<td width="25%"><img src="screenshots/mobile-menu.png" width="100%" alt="GLINT start screen on mobile"><p align="center"><sub>Start screen</sub></p></td>
-<td width="25%"><img src="screenshots/mobile-gameplay.png" width="100%" alt="GLINT gameplay on mobile"><p align="center"><sub>In a run</sub></p></td>
-<td width="25%"><img src="screenshots/mobile-levelup.png" width="100%" alt="GLINT level-up screen on mobile"><p align="center"><sub>Level-up pick</sub></p></td>
-<td width="25%"><img src="screenshots/mobile-gameover.png" width="100%" alt="GLINT game-over screen on mobile"><p align="center"><sub>Run summary</sub></p></td>
+<td width="25%"><img src="screenshots/mobile-menu.webp" width="100%" alt="GLINT start screen on mobile"><p align="center"><sub>Start screen</sub></p></td>
+<td width="25%"><img src="screenshots/mobile-gameplay.webp" width="100%" alt="GLINT gameplay on mobile"><p align="center"><sub>In a run</sub></p></td>
+<td width="25%"><img src="screenshots/mobile-levelup.webp" width="100%" alt="GLINT level-up screen on mobile"><p align="center"><sub>Level-up pick</sub></p></td>
+<td width="25%"><img src="screenshots/mobile-gameover.webp" width="100%" alt="GLINT game-over screen on mobile"><p align="center"><sub>Run summary</sub></p></td>
 </tr>
 </table>
 
@@ -38,12 +38,12 @@ No login. No download. No ads. No energy timers. Just open it and go.
 
 <table>
 <tr>
-<td width="50%"><img src="screenshots/desktop-menu.png" width="100%" alt="GLINT start screen on desktop"><p align="center"><sub>Start screen</sub></p></td>
-<td width="50%"><img src="screenshots/desktop-gameplay.png" width="100%" alt="GLINT gameplay on desktop with a high combo and screen full of enemies"><p align="center"><sub>Mid-combo chaos</sub></p></td>
+<td width="50%"><img src="screenshots/desktop-menu.webp" width="100%" alt="GLINT start screen on desktop"><p align="center"><sub>Start screen</sub></p></td>
+<td width="50%"><img src="screenshots/desktop-gameplay.webp" width="100%" alt="GLINT gameplay on desktop with a high combo and screen full of enemies"><p align="center"><sub>Mid-combo chaos</sub></p></td>
 </tr>
 <tr>
-<td width="50%"><img src="screenshots/desktop-levelup.png" width="100%" alt="GLINT level-up screen on desktop offering three upgrade choices"><p align="center"><sub>Level-up pick</sub></p></td>
-<td width="50%"><img src="screenshots/desktop-gameover.png" width="100%" alt="GLINT game-over screen on desktop showing final score and a new best"><p align="center"><sub>Run summary</sub></p></td>
+<td width="50%"><img src="screenshots/desktop-levelup.webp" width="100%" alt="GLINT level-up screen on desktop offering three upgrade choices"><p align="center"><sub>Level-up pick</sub></p></td>
+<td width="50%"><img src="screenshots/desktop-gameover.webp" width="100%" alt="GLINT game-over screen on desktop showing final score and a new best"><p align="center"><sub>Run summary</sub></p></td>
 </tr>
 </table>
 
