@@ -3,8 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>GLINT — one-swipe dash arcade</title>
+<title>GLINT - one-swipe dash arcade</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><radialGradient id='g' cx='50%25' cy='46%25' r='65%25'><stop offset='0%25' stop-color='%23eafdff'/><stop offset='55%25' stop-color='%235ef2ff'/><stop offset='100%25' stop-color='%231fb8d6'/></radialGradient></defs><rect width='100' height='100' rx='22' fill='%23090c18'/><g transform='translate(50,52) rotate(45)'><rect x='-26' y='-26' width='52' height='52' rx='7' fill='url(%23g)'/></g></svg>">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" sizes="192x192" href="icons/icon-192.png">
+<meta name="theme-color" content="#090c18">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GLINT">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
 <style>
@@ -126,7 +134,7 @@ h2{font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(26px,8vw,3
 <div class="screen show" id="menu"><div class="card two"><div class="col">
   <div class="logo">GL<span></span>NT</div>
   <p class="tag"><b>Dash through them. Never stand still.</b><br>One swipe is the whole game.</p>
-  <div class="stats"><div class="stat"><label>Best score</label><div class="num" id="mbest">0</div></div><div class="stat"><label>Today's daily</label><div class="num" id="mdaily">—</div></div></div>
+  <div class="stats"><div class="stat"><label>Best score</label><div class="num" id="mbest">0</div></div><div class="stat"><label>Today's daily</label><div class="num" id="mdaily">-</div></div></div>
   </div><div class="col">
   <button class="btn pri" id="bplay">PLAY</button>
   <button class="btn" id="bdaily">DAILY RUN <small id="dlabel"></small></button>
@@ -304,7 +312,7 @@ function newRun(daily){
      spawnT:.2,swarmAt:30,novaN:0,novaC:0,ups:{},tut:save.tut?0:1,tutT:0,dieT:0,pend:false,shownScore:-1};
   P={x:W/2,y:(B.t+B.b)/2,r:8,ang:-Math.PI/2,ch:3,maxCh:3,rt:0,rech:.72,range:150,blade:7,magnet:62,after:.07,inv:0,dash:null,buf:null,trail:[],dead:false,empty:0};
   E=[];BL=[];SH=[];PT=[];FT=[];RG=[];shake=0;hitstop=0;
-  if(S.tut===1)hint(inputKind==='touch'?'SWIPE anywhere to dash':'CLICK to dash there — or WASD / arrows',true);
+  if(S.tut===1)hint(inputKind==='touch'?'SWIPE anywhere to dash':'CLICK to dash there - or WASD / arrows',true);
   else{hint('');for(let i=0;i<3;i++)spawnAway('drifter',.6)}
   $('hud').classList.add('on');show(null);hud(true);
 }
@@ -414,7 +422,7 @@ function update(dt){
   // combo
   if(S.combo>0){S.comboT-=dt;if(S.comboT<=0)S.combo=0}
   // tutorial
-  if(S.tut===2&&!E.length){S.tut=3;S.tutT=3;hint('Now they hunt you — keep dashing!',false);for(let i=0;i<3;i++)spawnAway('drifter',.9)}
+  if(S.tut===2&&!E.length){S.tut=3;S.tutT=3;hint('Now they hunt you - keep dashing!',false);for(let i=0;i<3;i++)spawnAway('drifter',.9)}
   if(S.tut===3){S.tutT-=dt;if(S.tutT<=0){S.tut=0;hint('');save.tut=true;persist()}}
   if(!P.dead&&(S.tut===0||S.tut===3))spawner(dt);
   // enemies
@@ -580,8 +588,8 @@ function endRun(){
   $('newbest').classList.toggle('on',nb||nbd);$('newbest').textContent=nbd?'NEW DAILY BEST':'NEW BEST';
   $('otime').textContent=fmtT(S.t);$('ocombo').textContent=S.bestCombo;$('okills').textContent=S.kills;$('olevel').textContent=S.level;
   $('unl').innerHTML=got.length?'Unlocked: '+got.map(s=>'<b>'+s.name+' skin</b>').join(', '):'';
-  const nx=SKINS.find(s=>!s.ok(save));$('nextu').textContent=nx?'Next unlock — '+nx.name+': '+nx.req:(!nb&&!S.daily?'Best: '+save.best.toLocaleString('en-US'):'');
-  shareText='GLINT '+(S.daily?'Daily '+today():'run')+' — '+sc.toLocaleString('en-US')+' pts · x'+S.bestCombo+' combo · '+fmtT(S.t)+' · LV '+S.level;
+  const nx=SKINS.find(s=>!s.ok(save));$('nextu').textContent=nx?'Next unlock - '+nx.name+': '+nx.req:(!nb&&!S.daily?'Best: '+save.best.toLocaleString('en-US'):'');
+  shareText='GLINT '+(S.daily?'Daily '+today():'run')+' - '+sc.toLocaleString('en-US')+' pts · x'+S.bestCombo+' combo · '+fmtT(S.t)+' · LV '+S.level;
   $('sharebox').style.display='none';$('bshare').textContent='COPY RESULT';
   const t0=performance.now();overAt=t0;const f=$('final');
   (function tick(){const k=Math.min(1,(performance.now()-t0)/700);f.textContent=Math.floor(sc*(1-Math.pow(1-k,3))).toLocaleString('en-US');if(k<1&&S.mode==='over')requestAnimationFrame(tick);else f.textContent=sc.toLocaleString('en-US')})();
@@ -589,11 +597,11 @@ function endRun(){
 }
 function refreshMenu(){
   $('mbest').textContent=save.best.toLocaleString('en-US');
-  $('mdaily').textContent=save.daily.d===today()&&save.daily.s?save.daily.s.toLocaleString('en-US'):'—';
+  $('mdaily').textContent=save.daily.d===today()&&save.daily.s?save.daily.s.toLocaleString('en-US'):'-';
   $('dlabel').textContent=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'});
   const box=$('skins');box.innerHTML='';
   SKINS.forEach(s=>{const ok=s.ok(save),b=document.createElement('button');b.className='skin'+(ok?'':' lock')+(s.id===save.skin?' sel':'');b.style.setProperty('--c',s.c);b.innerHTML='<i></i>';b.setAttribute('aria-label',s.name+(ok?'':' (locked: '+s.req+')'));
-    b.onclick=()=>{initAudio();sfx.ui();if(ok){save.skin=s.id;persist();applySkin();refreshMenu();$('skinreq').textContent=s.name}else $('skinreq').textContent=s.name+' — '+s.req};box.appendChild(b)});
+    b.onclick=()=>{initAudio();sfx.ui();if(ok){save.skin=s.id;persist();applySkin();refreshMenu();$('skinreq').textContent=s.name}else $('skinreq').textContent=s.name+' - '+s.req};box.appendChild(b)});
   if(!$('skinreq').textContent)$('skinreq').textContent=skin().name;
   syncTogs();
 }
