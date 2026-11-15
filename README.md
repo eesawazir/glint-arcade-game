@@ -1,60 +1,127 @@
-# GLINT
+<div align="center">
 
-A one-swipe dash arcade game for the browser. You can only move by dashing; dashing through an enemy slices it, and standing still gets you hit.
+# 💠 GLINT
 
-No build step, no dependencies, no accounts. The whole game is `index.html`.
+### A one-swipe dash arcade game. Zero installs, zero ads, zero mercy.
 
-## Play locally
+**You only move by dashing. Dash through enemies to slice them. Stand still and you die.**
 
-Open `index.html` in any modern browser. No server is needed.
+[![Play](https://img.shields.io/badge/▶_PLAY-click_here-5ef2ff?style=for-the-badge)](index.html)
+![No dependencies](https://img.shields.io/badge/dependencies-zero-6dffb0?style=flat-square)
+![No installs](https://img.shields.io/badge/install-none-ffb23d?style=flat-square)
+![Single file](https://img.shields.io/badge/size-~46KB-ff8a3d?style=flat-square)
 
-## Host on GitHub Pages
+</div>
 
-1. Push this folder to a GitHub repository.
-2. In the repository, go to **Settings → Pages**.
-3. Under **Source**, choose **Deploy from a branch**, pick `main` and `/ (root)`, and save.
-4. The game will be served at `https://<username>.github.io/<repo>/`.
+---
 
-## Controls
+## 🎮 What is this?
 
-| Device | Control |
+GLINT is a browser-based arcade game built around one idea: **the dash is the only verb.**
+
+There's no "move" button. You pick a direction, dash, and anything in your path gets sliced. Enemies drop shards that level you up, combos stack a score multiplier up to **x20**, and the moment you hesitate, something closes in. It's built to be learned in 10 seconds and chased for 10 minutes.
+
+No login. No download. No ads. No energy timers. Just open it and go.
+
+<table>
+<tr>
+<td width="50%">
+
+**📱 On mobile**
+<img src="screenshots/menu.png" width="100%" alt="GLINT start screen on mobile">
+
+</td>
+<td width="50%">
+
+**⚡ Mid-combo chaos**
+<img src="screenshots/gameplay.png" width="100%" alt="GLINT gameplay with a high combo and screen full of enemies">
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**⬆️ Level-up picks**
+<img src="screenshots/levelup.png" width="100%" alt="GLINT level-up screen offering three upgrade choices">
+
+</td>
+<td width="50%">
+
+**💀 Run summary**
+<img src="screenshots/gameover.png" width="100%" alt="GLINT game-over screen showing final score and a new best">
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🕹️ Controls
+
+| Device | Input |
 |---|---|
-| Touch | Swipe in a direction, or tap where you want to dash |
-| Mouse | Click where you want to dash |
-| Keyboard | WASD or arrow keys to dash (hold two for diagonals) |
-| Pause | P or Esc, or the pause button |
-| Start / restart | Space or Enter |
-| Level-up | Click a card, or press 1 / 2 / 3 |
-| Mute sound | M |
+| 📱 Touch | Swipe a direction, or tap where you want to dash |
+| 🖱️ Mouse | Click where you want to dash |
+| ⌨️ Keyboard | `WASD` / arrow keys (hold two keys for diagonals) |
+| ⏸️ Pause | `P`, `Esc`, or the pause button |
+| ▶️ Start / restart | `Space` or `Enter` |
+| ⬆️ Level-up pick | Click a card, or press `1` / `2` / `3` |
+| 🔇 Mute | `M` |
 
-## How it works
+---
 
-- You hold three dash charges. They refill over time, and every slice refunds one.
-- Slices build a combo; the score multiplier rises every four slices, up to x20.
-- Slicing several enemies in one dash gives a bonus.
-- Enemies drop shards. Collect enough to level up and pick one of three upgrades for that run.
-- Spiked enemies (red, with spikes out) hurt you if you dash into them. Wait for them to retract.
-- A swarm arrives every 30 seconds, and spawn rate and enemy speed keep rising.
-- The Daily Run uses a date-based seed, so everyone gets the same opening each day.
-- Skins unlock from lifetime milestones.
+## ⚙️ How it works
 
-## Technology
+- 🔋 You hold **3 dash charges** that refill over time — every slice refunds one, so chaining kills keeps you moving.
+- 🔥 Slicing builds a **combo**; your multiplier climbs every 4 slices, up to **x20**.
+- 💥 Slice multiple enemies in a *single* dash for a big bonus.
+- 💎 Enemies drop shards — collect them to level up and pick **1 of 3 upgrades** for that run.
+- ⚠️ **Spiked enemies** (red, spikes extended) will hurt *you* if you dash into them — wait for them to retract.
+- 🌊 A **swarm** arrives every 30 seconds, and both spawn rate and enemy speed climb the longer you survive.
+- 📅 **Daily Run** — a date-seeded run so everyone gets the same opening layout each day. Beat it, then copy your result to flex.
+- 🎨 **5 unlockable skins**, earned through lifetime milestones (total kills, best combo, survival time, daily runs completed).
 
-- HTML5 Canvas 2D, plain JavaScript, CSS
-- Web Audio API for synthesized sound effects and music
-- `localStorage` for high score, stats, settings and unlocks (key: `glint.save.v1`)
-- Google Fonts (Unbounded, Space Grotesk) with a system-font fallback if offline
+---
 
-## Testing status
+## 🚀 Play it
 
-Tested with automated headless-Chrome scripts at desktop, phone, tablet and landscape-phone sizes, plus bot players for balance. It has not been playtested by people, checked on real devices or Safari, or had its audio checked by ear.
+**Locally:** just open `index.html` in any modern browser. No server, no build step.
 
-## Known limitations
+**Hosted (GitHub Pages):**
+1. Push this repo to GitHub.
+2. Go to **Settings → Pages**.
+3. Under **Source**, pick **Deploy from a branch** → `main` → `/ (root)` → Save.
+4. Your game goes live at `https://<your-username>.github.io/<repo-name>/`.
 
-- Scores are stored per browser; there is no online leaderboard.
-- Daily runs share a seed but are not frame-for-frame identical between players.
-- `window.__glint` exposes game state for testing; remove it if you do not want it public.
+---
 
-## License
+## 🧱 Built with
 
-No license has been chosen yet. Add a `LICENSE` file before publishing if you want others to be able to reuse the code.
+- **Canvas 2D** + plain **JavaScript** — no framework, no bundler
+- **Web Audio API** — all sound effects and music are synthesized in-browser, no audio files
+- **`localStorage`** — high score, stats, settings, and skin unlocks persist locally (`glint.save.v1`)
+- **Google Fonts** (Unbounded, Space Grotesk), with a system-font fallback if offline
+
+One file. No `npm install`. No dependencies to go stale.
+
+---
+
+## ✅ Testing status
+
+Verified with automated headless-Chrome test suites across desktop, phone, tablet, and landscape-phone viewports, plus simulated bot players tuned for difficulty/balance checks.
+
+**Not yet done:** real human playtesting, real-device/Safari checks, or an audio-by-ear pass.
+
+---
+
+## ⚠️ Known limitations
+
+- 🏆 Scores live in your browser only — no online leaderboard.
+- 📅 Daily runs share a seed but aren't frame-identical between players.
+- 🔧 `window.__glint` exposes game state for testing purposes (lets anyone edit score via devtools) — strip it out before adding any shared/competitive leaderboard.
+
+---
+
+## 📄 License
+
+No license chosen yet — add a `LICENSE` file before you publish if you want others to be able to reuse the code.
