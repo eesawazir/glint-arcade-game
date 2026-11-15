@@ -6,7 +6,7 @@
 
 **You only move by dashing. Dash through enemies to slice them. Stand still and you die.**
 
-[![Play](https://img.shields.io/badge/▶_PLAY-click_here-5ef2ff?style=for-the-badge)](index.html)
+[![Play](https://img.shields.io/badge/▶_PLAY-click_here-5ef2ff?style=for-the-badge)](https://eesawazir.github.io/glint-arcade-game/)
 ![No dependencies](https://img.shields.io/badge/dependencies-zero-6dffb0?style=flat-square)
 ![No installs](https://img.shields.io/badge/install-none-ffb23d?style=flat-square)
 ![Single file](https://img.shields.io/badge/size-~46KB-ff8a3d?style=flat-square)
