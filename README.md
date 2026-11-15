@@ -65,13 +65,13 @@ No login. No download. No ads. No energy timers. Just open it and go.
 
 ## ⚙️ How it works
 
-- 🔋 You hold **3 dash charges** that refill over time — every slice refunds one, so chaining kills keeps you moving.
+- 🔋 You hold **3 dash charges** that refill over time - every slice refunds one, so chaining kills keeps you moving.
 - 🔥 Slicing builds a **combo**; your multiplier climbs every 4 slices, up to **x20**.
 - 💥 Slice multiple enemies in a *single* dash for a big bonus.
-- 💎 Enemies drop shards — collect them to level up and pick **1 of 3 upgrades** for that run.
-- ⚠️ **Spiked enemies** (red, spikes extended) will hurt *you* if you dash into them — wait for them to retract.
+- 💎 Enemies drop shards - collect them to level up and pick **1 of 3 upgrades** for that run.
+- ⚠️ **Spiked enemies** (red, spikes extended) will hurt *you* if you dash into them - wait for them to retract.
 - 🌊 A **swarm** arrives every 30 seconds, and both spawn rate and enemy speed climb the longer you survive.
-- 📅 **Daily Run** — a date-seeded run so everyone gets the same opening layout each day. Beat it, then copy your result to flex.
+- 📅 **Daily Run** - a date-seeded run so everyone gets the same opening layout each day. Beat it, then copy your result to flex.
 - 🎨 **5 unlockable skins**, earned through lifetime milestones (total kills, best combo, survival time, daily runs completed).
 
 ---
@@ -90,9 +90,9 @@ No login. No download. No ads. No energy timers. Just open it and go.
 
 ## 🧱 Built with
 
-- **Canvas 2D** + plain **JavaScript** — no framework, no bundler
-- **Web Audio API** — all sound effects and music are synthesized in-browser, no audio files
-- **`localStorage`** — high score, stats, settings, and skin unlocks persist locally (`glint.save.v1`)
+- **Canvas 2D** + plain **JavaScript** - no framework, no bundler
+- **Web Audio API** - all sound effects and music are synthesized in-browser, no audio files
+- **`localStorage`** - high score, stats, settings, and skin unlocks persist locally (`glint.save.v1`)
 - **Google Fonts** (Unbounded, Space Grotesk), with a system-font fallback if offline
 
 One file. No `npm install`. No dependencies to go stale.
@@ -109,12 +109,12 @@ Verified with automated headless-Chrome test suites across desktop, phone, table
 
 ## ⚠️ Known limitations
 
-- 🏆 Scores live in your browser only — no online leaderboard.
+- 🏆 Scores live in your browser only - no online leaderboard.
 - 📅 Daily runs share a seed but aren't frame-identical between players.
-- 🔧 `window.__glint` exposes game state for testing purposes (lets anyone edit score via devtools) — strip it out before adding any shared/competitive leaderboard.
+- 🔧 `window.__glint` exposes game state for testing purposes (lets anyone edit score via devtools) - strip it out before adding any shared/competitive leaderboard.
 
 ---
 
 ## 📄 License
 
-No license chosen yet — add a `LICENSE` file before you publish if you want others to be able to reuse the code.
+No license chosen yet - add a `LICENSE` file before you publish if you want others to be able to reuse the code.
