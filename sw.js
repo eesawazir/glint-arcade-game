@@ -1,6 +1,6 @@
 // GLINT service worker - makes the game fully playable with no network connection
 // after it has been opened online at least once.
-const VERSION = "glint-v1.2";
+const VERSION = "glint-v1.4";
 const CORE = [
   "./",
   "./index.html",
@@ -9,6 +9,8 @@ const CORE = [
   "./icons/icon-512.png",
   "./icons/icon-maskable-512.png",
   "./icons/apple-touch-icon.png",
+  "./fonts/unbounded-latin.woff2",
+  "./fonts/space-grotesk-latin.woff2",
 ];
 
 self.addEventListener("install", (e) => {

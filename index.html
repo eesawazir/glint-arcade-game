@@ -37,12 +37,37 @@
       content="black-translucent"
     />
     <meta name="apple-mobile-web-app-title" content="GLINT" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- Self-hosted fonts, preloaded so text renders in the right font from the first paint. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Unbounded:wght@600;800&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="fonts/unbounded-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/space-grotesk-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
     <style>
+      /* font-display: block = never show a fallback font; wait briefly for these instead. */
+      @font-face {
+        font-family: "Unbounded";
+        font-style: normal;
+        font-weight: 200 900;
+        font-display: block;
+        src: url("fonts/unbounded-latin.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Space Grotesk";
+        font-style: normal;
+        font-weight: 300 700;
+        font-display: block;
+        src: url("fonts/space-grotesk-latin.woff2") format("woff2");
+      }
       :root {
         --ac: #5ef2ff;
         --bg: #090c18;
@@ -77,6 +102,55 @@
         height: 100%;
         display: block;
         touch-action: none;
+      }
+      /* Menu background glows: CSS animations run on the GPU, keeping the main thread free. */
+      #amb {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        display: none;
+      }
+      #amb.on {
+        display: block;
+      }
+      #amb i {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        animation: ambx var(--dx) ease-in-out var(--px) infinite alternate;
+      }
+      #amb b {
+        position: absolute;
+        width: calc(var(--u) * var(--s));
+        height: calc(var(--u) * var(--s));
+        translate: -50% -50%;
+        border-radius: 50%;
+        background: radial-gradient(closest-side, var(--c), transparent);
+        opacity: 0.09;
+        animation: amby var(--dy) ease-in-out var(--py) infinite alternate;
+      }
+      @keyframes ambx {
+        from {
+          transform: translateX(-42vw);
+        }
+        to {
+          transform: translateX(42vw);
+        }
+      }
+      @keyframes amby {
+        from {
+          transform: translateY(-42vh);
+        }
+        to {
+          transform: translateY(42vh);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #amb i,
+        #amb b {
+          animation-play-state: paused;
+        }
       }
       .num {
         font-family: "Unbounded", "Space Grotesk", sans-serif;
@@ -757,6 +831,7 @@
   </head>
   <body>
     <canvas id="c"></canvas>
+    <div id="amb"></div>
 
     <div id="hud">
       <div id="vig"></div>
@@ -1231,6 +1306,8 @@
             r: W - 10 * U,
             b: H - 10 * U,
           };
+          menuDrawn = false;
+          document.documentElement.style.setProperty("--u", U);
           bgc = document.createElement("canvas");
           bgc.width = cv.width;
           bgc.height = cv.height;
@@ -2102,29 +2179,39 @@
           }
           ctx.closePath();
         }
-        let idleT = 0;
+        const amb = $("amb");
+        let ambOn = false,
+          menuDrawn = false;
+        for (let i = 0; i < 14; i++) {
+          // Old canvas paths: x = cos(phase), y = sin(phase). Convert each phase to an animation delay.
+          const tx = (Math.PI + 3.21 * i) % (2 * Math.PI),
+            ty = (Math.PI / 2 + 3.8 * i) % (2 * Math.PI),
+            o = document.createElement("i"),
+            g = document.createElement("b");
+          o.style.cssText =
+            "--dx:21s;--px:" + (-(tx / Math.PI) * 21).toFixed(2) + "s";
+          g.style.cssText =
+            "--dy:27s;--py:" +
+            (-(ty / Math.PI) * 27).toFixed(2) +
+            "s;--s:" +
+            2 * (30 + (i % 4) * 14) +
+            "px;--c:" +
+            (i % 3 ? "var(--ac)" : "#ff4d7a");
+          o.appendChild(g);
+          amb.appendChild(o);
+        }
         function render(now) {
+          // Menu: show the CSS glows and draw the static background only once.
+          const menu = S.mode === "menu";
+          if (menu !== ambOn) {
+            ambOn = menu;
+            amb.classList.toggle("on", menu);
+          }
+          if (menu && menuDrawn) return;
           ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
           ctx.drawImage(bgc, 0, 0, W, H);
-          if (S.mode === "menu") {
-            // ambient attract
-            idleT += 0.016;
-            ctx.globalCompositeOperation = "lighter";
-            for (let i = 0; i < 14; i++) {
-              const a = idleT * 0.12 + i * 1.7,
-                x = W / 2 + Math.cos(a * 1.3 + i) * W * 0.42,
-                y = H / 2 + Math.sin(a + i * 2.1) * H * 0.42;
-              glow(
-                x,
-                y,
-                (30 + (i % 4) * 14) * U,
-                i % 3 ? AC_COL : "#ff4d7a",
-                0.1,
-              );
-            }
-            ctx.globalCompositeOperation = "source-over";
-            return;
-          }
+          menuDrawn = menu;
+          if (menu) return;
           if (!P) return;
           ctx.save();
           if (shake > 0.2 && save.shake)

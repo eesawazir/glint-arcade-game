@@ -78,7 +78,7 @@ No login. No download. No ads. No energy timers. Just open it and go.
 - **Canvas 2D** + plain **JavaScript** - no framework, no bundler
 - **Web Audio API** - all sound effects and music are synthesized in-browser, no audio files
 - **`localStorage`** - high score, stats, settings, and skin unlocks persist locally (`glint.save.v1`)
-- **Google Fonts** (Unbounded, Space Grotesk), with a system-font fallback if offline
+- **Self-hosted fonts** (Unbounded, Space Grotesk, SIL Open Font License), preloaded and cached for offline play
 
 One file. No `npm install`. No dependencies to go stale.
 
