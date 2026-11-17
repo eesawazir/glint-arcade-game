@@ -1,6 +1,6 @@
 // GLINT service worker - makes the game fully playable with no network connection
 // after it has been opened online at least once.
-const VERSION = 'glint-v1';
+const VERSION = 'glint-v1.1';
 const CORE = [
   './',
   './index.html',

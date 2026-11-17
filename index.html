@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>GLINT - one-swipe dash arcade</title>
+<meta name="description" content="Dash through them. Never stand still. A one-swipe dash arcade game you can play free in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://eesawazir.github.io/glint-arcade-game/">
+<meta property="og:title" content="GLINT - one-swipe dash arcade">
+<meta property="og:description" content="Dash through them. Never stand still. Play free in your browser.">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><radialGradient id='g' cx='50%25' cy='46%25' r='65%25'><stop offset='0%25' stop-color='%23eafdff'/><stop offset='55%25' stop-color='%235ef2ff'/><stop offset='100%25' stop-color='%231fb8d6'/></radialGradient></defs><rect width='100' height='100' rx='22' fill='%23090c18'/><g transform='translate(50,52) rotate(45)'><rect x='-26' y='-26' width='52' height='52' rx='7' fill='url(%23g)'/></g></svg>">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -62,13 +68,26 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .card{width:100%;max-width:400px;display:flex;flex-direction:column;align-items:center;gap:14px;transform:translateY(10px);transition:transform .25s;margin:auto}
 .screen.show .card{transform:none}
 .logo{font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(50px,17vw,84px);letter-spacing:.02em;line-height:1;display:flex;align-items:center;gap:.14em}
-.logo span{display:inline-block;width:.46em;height:.46em;background:var(--ac);transform:rotate(45deg);border-radius:.06em;box-shadow:0 0 30px var(--ac);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{50%{transform:rotate(45deg) scale(.82)}}
+.logo span{display:inline-block;width:.64em;height:.64em;margin:0 .07em;background:var(--ac);transform:rotate(45deg);border-radius:.06em;box-shadow:0 0 30px var(--ac);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{transform:rotate(45deg) scale(.9)}}
 .tag{color:var(--dim);font-size:15px;text-align:center;line-height:1.45}
 .tag b{color:var(--tx);font-weight:500}
 .btn{width:100%;min-height:54px;border-radius:14px;font-weight:700;font-size:17px;letter-spacing:.08em;background:rgba(255,255,255,.07);border:1px solid var(--line);transition:transform .08s,background .15s;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 14px}
 .btn:active{transform:scale(.97)}
-.btn.pri{background:var(--ac);color:#06101a;border-color:transparent;box-shadow:0 6px 30px -8px var(--ac)}
+#over .row .btn,#share .row .btn{background:rgba(30,36,62,.82)}
+#unl:empty,#nextu:empty{display:none}
+@media (orientation:portrait),(min-height:521px){
+  #over .card{gap:0}
+  #over h2{line-height:1.1}
+  #over #newbest{margin-top:10px}
+  #over #final{margin-top:4px}
+  #over .stats{margin-top:16px}
+  #over #unl{margin-top:16px}
+  #over .row{margin-top:20px;gap:8px}
+  #over #bretry{margin-top:8px}
+  #over #nextu{margin-top:14px}
+}
+.btn.pri{background:var(--ac);color:#06101a;border-color:transparent;box-shadow:0 4px 22px -6px color-mix(in srgb,var(--ac) 65%,transparent)}
 .btn small{font-weight:500;font-size:12px;letter-spacing:.04em;opacity:.7}
 .row{display:flex;gap:10px;width:100%}
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;width:100%}
@@ -91,7 +110,10 @@ h2{font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(26px,8vw,3
 @keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
 #unl,#nextu{font-size:13px;color:var(--dim);text-align:center;min-height:0}
 #unl b{color:#ffd84a}
-#sharebox{width:100%;font:inherit;font-size:13px;background:var(--panel);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:10px;display:none;resize:none;user-select:text;-webkit-user-select:text}
+.btn svg{flex:none;width:20px;height:20px;fill:currentColor}
+#share{z-index:5}
+#shimg{display:block;max-width:100%;max-height:34vh;border-radius:12px;border:1px solid var(--line);background:var(--bg)}
+#share .row .btn{min-height:46px;font-size:14px}
 #ups{display:flex;flex-direction:column;gap:10px;width:100%}
 .up{width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;gap:14px;align-items:center;transition:transform .08s,border-color .15s;animation:rise .3s backwards}
 .up:nth-child(2){animation-delay:.06s}.up:nth-child(3){animation-delay:.12s}
@@ -168,11 +190,18 @@ h2{font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(26px,8vw,3
     <div class="stat"><label>Level</label><div class="num" id="olevel">1</div></div>
   </div>
   </div><div class="col">
-  <div id="unl"></div><div id="nextu"></div>
+  <div id="unl"></div>
+  <div class="row"><button class="btn" id="bshare"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5 6 12l12 7" fill="none" stroke="currentColor" stroke-width="2.6"/><circle cx="18" cy="5" r="3.5"/><circle cx="6" cy="12" r="3.5"/><circle cx="18" cy="19" r="3.5"/></svg>SHARE</button><button class="btn" id="bmenu">MENU</button></div>
   <button class="btn pri" id="bretry">PLAY AGAIN</button>
-  <div class="row"><button class="btn" id="bshare">COPY RESULT</button><button class="btn" id="bmenu">MENU</button></div>
-  <textarea id="sharebox" rows="3" readonly></textarea>
+  <div id="nextu"></div>
 </div></div></div>
+
+<div class="screen dimmed" id="share"><div class="card">
+  <h2>SHARE</h2>
+  <img id="shimg" alt="Screenshot of your result">
+  <div class="row"><button class="btn" id="shcopy">COPY IMAGE</button><button class="btn" id="shsave">SAVE IMAGE</button></div>
+  <button class="btn pri" id="shclose">DONE</button>
+</div></div>
 
 <script>
 (()=>{'use strict';
@@ -573,7 +602,7 @@ function choose(u){
 function pause(){if(S.mode!=='play'||P.dead)return;S.mode='pause';show('pause');syncTogs()}
 function resume(){if(S.mode!=='pause')return;S.mode='play';show(null);last=0}
 function toMenu(){S.mode='menu';$('hud').classList.remove('on');hint('');refreshMenu();show('menu')}
-let overAt=0,shareText='';
+let overAt=0,shareText='',shareBlob=null,shareOpen=false,R=null;
 function endRun(){
   S.mode='over';hint('');
   const before=SKINS.filter(s=>s.ok(save)).map(s=>s.id),sc=Math.floor(S.score);
@@ -590,7 +619,8 @@ function endRun(){
   $('unl').innerHTML=got.length?'Unlocked: '+got.map(s=>'<b>'+s.name+' skin</b>').join(', '):'';
   const nx=SKINS.find(s=>!s.ok(save));$('nextu').textContent=nx?'Next unlock - '+nx.name+': '+nx.req:(!nb&&!S.daily?'Best: '+save.best.toLocaleString('en-US'):'');
   shareText='GLINT '+(S.daily?'Daily '+today():'run')+' - '+sc.toLocaleString('en-US')+' pts · x'+S.bestCombo+' combo · '+fmtT(S.t)+' · LV '+S.level;
-  $('sharebox').style.display='none';$('bshare').textContent='COPY RESULT';
+  R={sc,daily:S.daily,nb:nb||nbd,nbl:nbd?'NEW DAILY BEST':'NEW BEST',t:fmtT(S.t),combo:S.bestCombo,kills:S.kills,level:S.level,when:new Date()};
+  shareBlob=null;setTimeout(()=>{if(S.mode==='over')buildShare().catch(()=>{})},500);
   const t0=performance.now();overAt=t0;const f=$('final');
   (function tick(){const k=Math.min(1,(performance.now()-t0)/700);f.textContent=Math.floor(sc*(1-Math.pow(1-k,3))).toLocaleString('en-US');if(k<1&&S.mode==='over')requestAnimationFrame(tick);else f.textContent=sc.toLocaleString('en-US')})();
   $('hud').classList.remove('on');show('over');
@@ -616,9 +646,78 @@ $('bresume').onclick=()=>{sfx.ui();resume()};
 $('brestart').onclick=()=>start(S.daily);
 $('bquit').onclick=()=>{sfx.ui();toMenu()};
 $('pauseb').onclick=e=>{e.stopPropagation();initAudio();pause()};
-$('bshare').onclick=()=>{
-  const done=()=>{$('bshare').textContent='COPIED ✓'},fail=()=>{const b=$('sharebox');b.value=shareText;b.style.display='block';b.focus();b.select();$('bshare').textContent='SELECT & COPY'};
-  try{navigator.clipboard.writeText(shareText).then(done,fail)}catch(e){fail()}
+/* ---------- share ---------- */
+const SHARE_URL=/^https?:$/.test(location.protocol)&&!/^(localhost|127\.|\[::1\])/.test(location.hostname)?location.origin+location.pathname:'https://eesawazir.github.io/glint-arcade-game/';
+// Screenshot of the result: the live game frame with the result card drawn on top.
+function shareCanvas(){
+  const k=Math.min(1,1600/Math.max(cv.width,cv.height)),c=document.createElement('canvas');
+  c.width=Math.round(cv.width*k);c.height=Math.round(cv.height*k);
+  const g=c.getContext('2d'),cw=c.width,ch=c.height;
+  g.fillStyle='#090c18';g.fillRect(0,0,cw,ch);g.drawImage(cv,0,0,cw,ch);
+  g.fillStyle='rgba(5,7,16,.74)';g.fillRect(0,0,cw,ch);
+  const CH=R.nb?440:404,u=Math.min(cw/440,ch/(CH+40));
+  g.translate(cw/2,(ch-CH*u)/2);g.scale(u,u);g.textAlign='center';g.textBaseline='middle';
+  const rr=(x,y,w,h,r)=>{g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath()};
+  const UB="'Unbounded','Space Grotesk',sans-serif",SG="'Space Grotesk',system-ui,sans-serif";
+  let y=22;
+  // wordmark
+  g.font='800 40px '+UB;const h=14,d=h*1.414,gap=4,wl=g.measureText('GL').width,wr=g.measureText('NT').width,x0=-(wl+wr+d*2+gap*2)/2;
+  g.fillStyle='#e9edff';g.textAlign='left';g.fillText('GL',x0,y);g.fillText('NT',x0+wl+gap*2+d*2,y);
+  const mt=g.measureText('GLNT'),cy=y+((mt.actualBoundingBoxDescent||0)-(mt.actualBoundingBoxAscent||0))/2;
+  g.save();g.translate(x0+wl+gap+d,cy);g.rotate(Math.PI/4);g.shadowColor=AC_COL;g.shadowBlur=22;g.fillStyle=AC_COL;rr(-h,-h,h*2,h*2,4);g.fill();g.restore();
+  g.textAlign='center';y+=46;
+  g.font='500 14px '+SG;g.fillStyle='#8c96bd';g.fillText(R.daily?'DAILY RUN  ·  '+today():'ONE-SWIPE DASH ARCADE',0,y);y+=30;
+  if(R.nb){g.font='700 12px '+SG;const w=g.measureText(R.nbl).width+30;g.fillStyle='#ffd84a';rr(-w/2,y-12,w,24,12);g.fill();g.fillStyle='#06101a';g.fillText(R.nbl,0,y+1);y+=36}
+  y+=30;g.font='600 64px '+UB;g.save();g.shadowColor=AC_COL;g.shadowBlur=30;g.fillStyle=AC_COL;g.fillText(R.sc.toLocaleString('en-US'),0,y,420);g.restore();y+=48;
+  g.font='500 12px '+SG;g.fillStyle='#8c96bd';g.fillText('POINTS',0,y);y+=24;
+  [['TIME',R.t],['BEST COMBO','x'+R.combo],['SLICED',R.kills],['LEVEL',R.level]].forEach((s,i)=>{
+    const x=i%2?4:-204,ty=y+(i>>1)*66;
+    g.fillStyle='rgba(16,21,42,.92)';rr(x,ty,200,58,12);g.fill();g.strokeStyle='rgba(140,150,189,.25)';g.lineWidth=1;g.stroke();
+    g.textAlign='left';g.font='500 10.5px '+SG;g.fillStyle='#8c96bd';g.fillText(s[0],x+13,ty+18);
+    g.font='600 17px '+UB;g.fillStyle='#e9edff';g.fillText(String(s[1]),x+13,ty+39);g.textAlign='center'});
+  const dt=R.when;
+  const stamp=dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+'  ·  '+dt.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZoneName:'short'});
+  g.font='500 13px '+SG;g.fillStyle='#8c96bd';g.fillText(stamp,0,y+152);
+  return c;
+}
+function buildShare(){
+  return new Promise((ok,no)=>{try{shareCanvas().toBlob(b=>{if(b){shareBlob=b;ok(b)}else no()},'image/png')}catch(e){no(e)}});
+}
+const shareMsg=()=>shareText+'\nCan you beat it? '+SHARE_URL;
+// Synchronous build, so the system share sheet still opens inside the tap (browsers require a fresh tap).
+function buildShareSync(){
+  const u=shareCanvas().toDataURL('image/png'),b=atob(u.slice(u.indexOf(',')+1)),a=new Uint8Array(b.length);
+  for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);
+  shareBlob=new Blob([a],{type:'image/png'});
+}
+const shareName=()=>{const d=R.when,p=n=>String(n).padStart(2,'0');return 'glint-'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'-'+p(d.getHours())+p(d.getMinutes())+'.png'};
+const shareFile=()=>new File([shareBlob],shareName(),{type:'image/png'});
+function openSheet(){
+  const im=$('shimg');if(im.src)URL.revokeObjectURL(im.src);
+  if(shareBlob){im.src=URL.createObjectURL(shareBlob);im.style.display=''}else im.style.display='none';
+  $('shcopy').textContent='COPY IMAGE';$('shsave').textContent='SAVE IMAGE';
+  $('shcopy').style.display=shareBlob&&navigator.clipboard&&window.ClipboardItem?'':'none';$('shsave').style.display=shareBlob?'':'none';
+  shareOpen=true;$('over').classList.remove('show');$('share').classList.add('show');
+}
+function closeSheet(){shareOpen=false;$('share').classList.remove('show');if(S.mode==='over')$('over').classList.add('show')}
+function doShare(){
+  // Phones and tablets: hand the screenshot to the system share sheet (WhatsApp, Facebook, Mail, ...).
+  if(shareBlob&&navigator.share&&navigator.canShare){
+    let f=null;try{f=shareFile();if(!navigator.canShare({files:[f]}))f=null}catch(e){f=null}
+    if(f){navigator.share({files:[f],title:'GLINT',text:shareMsg()}).catch(e=>{if(!e||e.name!=='AbortError')openSheet()});return}
+  }
+  // Phones whose browser can't share files: still use the system share sheet, with the score text and link.
+  if(navigator.share&&matchMedia('(pointer:coarse)').matches){navigator.share({title:'GLINT',text:shareText+'\nCan you beat it?',url:SHARE_URL}).catch(e=>{if(!e||e.name!=='AbortError')openSheet()});return}
+  openSheet();
+}
+$('bshare').onclick=()=>{sfx.ui();if(!R)return;if(!shareBlob){try{buildShareSync()}catch(e){}}doShare()};
+$('shclose').onclick=()=>{sfx.ui();closeSheet()};
+$('share').addEventListener('click',e=>{if(e.target===$('share'))closeSheet()});
+$('shcopy').onclick=()=>{
+  const b=$('shcopy');try{navigator.clipboard.write([new ClipboardItem({'image/png':shareBlob})]).then(()=>{b.textContent='COPIED ✓'},()=>{b.textContent='COPY FAILED'})}catch(e){b.textContent='COPY FAILED'}
+};
+$('shsave').onclick=()=>{
+  const a=document.createElement('a'),u=URL.createObjectURL(shareBlob);a.href=u;a.download=shareName();document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);$('shsave').textContent='SAVED ✓';
 };
 
 /* ---------- input ---------- */
@@ -651,6 +750,7 @@ window.addEventListener('keydown',e=>{
   if(DIRS[c]){e.preventDefault();if(e.repeat)return;initAudio();held[c]=true;
     if(S.mode==='play'){let x=0,y=0;for(const k in held)if(held[k]){x+=DIRS[k][0];y+=DIRS[k][1]}if(!x&&!y){x=DIRS[c][0];y=DIRS[c][1]}mouse.on=false;tryDash(x,y,null)}return}
   if(e.repeat)return;
+  if(shareOpen){if(c==='Escape'){e.preventDefault();closeSheet()}return}
   if(c==='KeyP'||c==='Escape'){e.preventDefault();if(S.mode==='play')pause();else if(S.mode==='pause')resume()}
   else if(c==='Space'||c==='Enter'){
     if(document.activeElement&&document.activeElement.tagName==='BUTTON'&&c==='Enter')return;
