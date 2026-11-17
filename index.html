@@ -668,7 +668,7 @@ function shareCanvas(){
   g.textAlign='center';y+=46;
   g.font='500 14px '+SG;g.fillStyle='#8c96bd';g.fillText(R.daily?'DAILY RUN  ·  '+today():'ONE-SWIPE DASH ARCADE',0,y);y+=30;
   if(R.nb){g.font='700 12px '+SG;const w=g.measureText(R.nbl).width+30;g.fillStyle='#ffd84a';rr(-w/2,y-12,w,24,12);g.fill();g.fillStyle='#06101a';g.fillText(R.nbl,0,y+1);y+=36}
-  y+=30;g.font='600 64px '+UB;g.save();g.shadowColor=AC_COL;g.shadowBlur=30;g.fillStyle=AC_COL;g.fillText(R.sc.toLocaleString('en-US'),0,y,420);g.restore();y+=48;
+  y+=30;g.font='600 64px '+UB;g.save();g.shadowColor=AC_COL;g.shadowBlur=18;g.fillStyle=AC_COL;g.fillText(R.sc.toLocaleString('en-US'),0,y,420);g.restore();y+=48;
   g.font='500 12px '+SG;g.fillStyle='#8c96bd';g.fillText('POINTS',0,y);y+=24;
   [['TIME',R.t],['BEST COMBO','x'+R.combo],['SLICED',R.kills],['LEVEL',R.level]].forEach((s,i)=>{
     const x=i%2?4:-204,ty=y+(i>>1)*66;
