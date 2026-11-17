@@ -1,15 +1,12 @@
 <div align="center">
 
-# 💠 GLINT
+<h1><img src="icons/icon-192.png" alt="" width="64" height="64" align="absmiddle"> GLINT</h1>
 
 ### A one-swipe dash arcade game. Zero installs, zero ads, zero mercy.
 
 **You only move by dashing. Dash through enemies to slice them. Stand still and you die.**
 
-[![Play](https://img.shields.io/badge/▶_PLAY-click_here-5ef2ff?style=for-the-badge)](https://eesawazir.github.io/glint-arcade-game/)
-![No dependencies](https://img.shields.io/badge/dependencies-zero-6dffb0?style=flat-square)
-![No installs](https://img.shields.io/badge/install-none-ffb23d?style=flat-square)
-![Single file](https://img.shields.io/badge/size-~46KB-ff8a3d?style=flat-square)
+[![Play](https://img.shields.io/badge/▶_PLAY-click_here-5ef2ff?style=for-the-badge)](https://eesawazir.github.io/glint-arcade-game/) ![No dependencies](https://img.shields.io/badge/dependencies-zero-6dffb0?style=flat-square) ![No installs](https://img.shields.io/badge/install-none-ffb23d?style=flat-square) ![Single file](https://img.shields.io/badge/size-~55KB-ff8a3d?style=flat-square)
 
 </div>
 
@@ -71,20 +68,8 @@ No login. No download. No ads. No energy timers. Just open it and go.
 - 💎 Enemies drop shards - collect them to level up and pick **1 of 3 upgrades** for that run.
 - ⚠️ **Spiked enemies** (red, spikes extended) will hurt *you* if you dash into them - wait for them to retract.
 - 🌊 A **swarm** arrives every 30 seconds, and both spawn rate and enemy speed climb the longer you survive.
-- 📅 **Daily Run** - a date-seeded run so everyone gets the same opening layout each day. Beat it, then copy your result to flex.
+- 📅 **Daily Run** - a date-seeded run so everyone gets the same opening layout each day. Beat it, then share a screenshot of your result to flex.
 - 🎨 **5 unlockable skins**, earned through lifetime milestones (total kills, best combo, survival time, daily runs completed).
-
----
-
-## 🚀 Play it
-
-**Locally:** just open `index.html` in any modern browser. No server, no build step.
-
-**Hosted (GitHub Pages):**
-1. Push this repo to GitHub.
-2. Go to **Settings → Pages**.
-3. Under **Source**, pick **Deploy from a branch** → `main` → `/ (root)` → Save.
-4. Your game goes live at `https://<your-username>.github.io/<repo-name>/`.
 
 ---
 
@@ -99,22 +84,8 @@ One file. No `npm install`. No dependencies to go stale.
 
 ---
 
-## ✅ Testing status
-
-Verified with automated headless-Chrome test suites across desktop, phone, tablet, and landscape-phone viewports, plus simulated bot players tuned for difficulty/balance checks.
-
-**Not yet done:** real human playtesting, real-device/Safari checks, or an audio-by-ear pass.
-
----
-
 ## ⚠️ Known limitations
 
 - 🏆 Scores live in your browser only - no online leaderboard.
 - 📅 Daily runs share a seed but aren't frame-identical between players.
 - 🔧 `window.__glint` exposes game state for testing purposes (lets anyone edit score via devtools) - strip it out before adding any shared/competitive leaderboard.
-
----
-
-## 📄 License
-
-No license chosen yet - add a `LICENSE` file before you publish if you want others to be able to reuse the code.
