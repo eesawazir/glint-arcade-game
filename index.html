@@ -648,7 +648,7 @@ $('bquit').onclick=()=>{sfx.ui();toMenu()};
 $('pauseb').onclick=e=>{e.stopPropagation();initAudio();pause()};
 /* ---------- share ---------- */
 const SHARE_URL=/^https?:$/.test(location.protocol)&&!/^(localhost|127\.|\[::1\])/.test(location.hostname)?location.origin+location.pathname:'https://eesawazir.github.io/glint-arcade-game/';
-// Screenshot of the result: the live game frame with the result card drawn on top.
+// Draw the share image: current game frame with the result card on top.
 function shareCanvas(){
   const k=Math.min(1,1600/Math.max(cv.width,cv.height)),c=document.createElement('canvas');
   c.width=Math.round(cv.width*k);c.height=Math.round(cv.height*k);
@@ -684,7 +684,7 @@ function buildShare(){
   return new Promise((ok,no)=>{try{shareCanvas().toBlob(b=>{if(b){shareBlob=b;ok(b)}else no()},'image/png')}catch(e){no(e)}});
 }
 const shareMsg=()=>shareText+'\nCan you beat it? '+SHARE_URL;
-// Synchronous build, so the system share sheet still opens inside the tap (browsers require a fresh tap).
+// Build the image instantly: phones only open the share sheet right after a tap.
 function buildShareSync(){
   const u=shareCanvas().toDataURL('image/png'),b=atob(u.slice(u.indexOf(',')+1)),a=new Uint8Array(b.length);
   for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);
@@ -701,12 +701,12 @@ function openSheet(){
 }
 function closeSheet(){shareOpen=false;$('share').classList.remove('show');if(S.mode==='over')$('over').classList.add('show')}
 function doShare(){
-  // Phones and tablets: hand the screenshot to the system share sheet (WhatsApp, Facebook, Mail, ...).
+  // Phones: open the system share sheet with the image.
   if(shareBlob&&navigator.share&&navigator.canShare){
     let f=null;try{f=shareFile();if(!navigator.canShare({files:[f]}))f=null}catch(e){f=null}
     if(f){navigator.share({files:[f],title:'GLINT',text:shareMsg()}).catch(e=>{if(!e||e.name!=='AbortError')openSheet()});return}
   }
-  // Phones whose browser can't share files: still use the system share sheet, with the score text and link.
+  // Phones that can't share images: share the text and link instead.
   if(navigator.share&&matchMedia('(pointer:coarse)').matches){navigator.share({title:'GLINT',text:shareText+'\nCan you beat it?',url:SHARE_URL}).catch(e=>{if(!e||e.name!=='AbortError')openSheet()});return}
   openSheet();
 }
@@ -784,7 +784,14 @@ window.__glint={get S(){return S},get P(){return P},get E(){return E},get BL(){r
 </script>
 <script>
 if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})});
+  window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').then(reg=>{
+    // Check for a new version whenever the app is reopened.
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)reg.update().catch(()=>{})});
+  }).catch(()=>{})});
+  // When a new version is ready, reload - but only on the menu, never mid-run.
+  if(navigator.serviceWorker.controller){let pend=false;const onMenu=()=>{try{return window.__glint.S.mode==='menu'}catch(e){return true}},go=()=>{if(onMenu())location.reload();else pend=true};
+    navigator.serviceWorker.addEventListener('controllerchange',go);
+    setInterval(()=>{if(pend&&onMenu()){pend=false;location.reload()}},1000)}
 }
 </script>
 </body>

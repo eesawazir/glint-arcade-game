@@ -1,6 +1,6 @@
 // GLINT service worker - makes the game fully playable with no network connection
 // after it has been opened online at least once.
-const VERSION = 'glint-v1.1';
+const VERSION = 'glint-v1.2';
 const CORE = [
   './',
   './index.html',
@@ -27,28 +27,40 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-// Cache-first for everything in scope (including cross-origin font requests),
-// falling back to the network, and updating the cache with whatever the
-// network returns so the game stays current when online.
-// If a navigation request fails outright (fully offline, nothing cached yet
-// for that exact URL), fall back to the cached index.html shell.
+const save = (req, res) => {
+  if (res && (res.ok || res.type === 'opaque')) {
+    const copy = res.clone();
+    caches.open(VERSION).then((cache) => cache.put(req, copy)).catch(() => {});
+  }
+  return res;
+};
+
+// Game page: try the network first so new deploys show up.
+// Fall back to the saved copy if offline or slower than 3 seconds.
+// Everything else (icons, fonts): use the saved copy, refresh in the background.
 self.addEventListener('fetch', (e) => {
-  if (e.request.method !== 'GET') return;
+  const req = e.request;
+  if (req.method !== 'GET') return;
+  const url = new URL(req.url);
+  const isPage = req.mode === 'navigate' ||
+    (url.origin === location.origin && /\/(index\.html)?$/.test(url.pathname));
+
+  if (isPage) {
+    e.respondWith(new Promise((resolve) => {
+      let done = false;
+      const fallback = () => caches.match(req).then((c) => c || caches.match('./index.html'))
+        .then((c) => { if (!done && c) { done = true; resolve(c); } return c; });
+      const timer = setTimeout(fallback, 3000);
+      fetch(req, { cache: 'no-cache' })
+        .then((res) => { clearTimeout(timer); save(req, res); if (!done) { done = true; resolve(res); } })
+        .catch(() => { clearTimeout(timer); fallback().then((c) => { if (!done) { done = true; resolve(c || Response.error()); } }); });
+    }));
+    return;
+  }
 
   e.respondWith(
-    caches.match(e.request).then((cached) => {
-      const network = fetch(e.request)
-        .then((res) => {
-          if (res && (res.ok || res.type === 'opaque')) {
-            const copy = res.clone();
-            caches.open(VERSION).then((cache) => cache.put(e.request, copy)).catch(() => {});
-          }
-          return res;
-        })
-        .catch(() => {
-          if (e.request.mode === 'navigate') return caches.match('./index.html');
-          return cached;
-        });
+    caches.match(req).then((cached) => {
+      const network = fetch(req).then((res) => save(req, res)).catch(() => cached);
       return cached || network;
     })
   );
