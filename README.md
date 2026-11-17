@@ -6,7 +6,7 @@
 
 **You only move by dashing. Dash through enemies to slice them. Stand still and you die.**
 
-[![Play](https://img.shields.io/badge/▶_PLAY-click_here-5ef2ff?style=for-the-badge)](https://eesawazir.github.io/glint-arcade-game/) ![No dependencies](https://img.shields.io/badge/dependencies-zero-6dffb0?style=flat-square) ![No installs](https://img.shields.io/badge/install-none-ffb23d?style=flat-square) ![Single file](https://img.shields.io/badge/size-~55KB-ff8a3d?style=flat-square)
+[![Play](https://img.shields.io/badge/▶_PLAY-click_here-5ef2ff?style=for-the-badge)](https://eesawazir.github.io/glint-arcade-game/) ![No dependencies](https://img.shields.io/badge/dependencies-zero-6dffb0?style=flat-square) ![No installs](https://img.shields.io/badge/install-none-ffb23d?style=flat-square) ![Single file](https://img.shields.io/badge/size-~98KB-ff8a3d?style=flat-square)
 
 </div>
 
@@ -48,15 +48,15 @@ No login. No download. No ads. No energy timers. Just open it and go.
 
 ## 🕹️ Controls
 
-| Device | Input |
-|---|---|
-| 📱 Touch | Swipe a direction, or tap where you want to dash |
-| 🖱️ Mouse | Click where you want to dash |
-| ⌨️ Keyboard | `WASD` / arrow keys (hold two keys for diagonals) |
-| ⏸️ Pause | `P`, `Esc`, or the pause button |
-| ▶️ Start / restart | `Space` or `Enter` |
-| ⬆️ Level-up pick | Click a card, or press `1` / `2` / `3` |
-| 🔇 Mute | `M` |
+| Device             | Input                                             |
+| ------------------ | ------------------------------------------------- |
+| 📱 Touch           | Swipe a direction, or tap where you want to dash  |
+| 🖱️ Mouse           | Click where you want to dash                      |
+| ⌨️ Keyboard        | `WASD` / arrow keys (hold two keys for diagonals) |
+| ⏸️ Pause           | `P`, `Esc`, or the pause button                   |
+| ▶️ Start / restart | `Space` or `Enter`                                |
+| ⬆️ Level-up pick   | Click a card, or press `1` / `2` / `3`            |
+| 🔇 Mute            | `M`                                               |
 
 ---
 
@@ -64,9 +64,9 @@ No login. No download. No ads. No energy timers. Just open it and go.
 
 - 🔋 You hold **3 dash charges** that refill over time - every slice refunds one, so chaining kills keeps you moving.
 - 🔥 Slicing builds a **combo**; your multiplier climbs every 4 slices, up to **x20**.
-- 💥 Slice multiple enemies in a *single* dash for a big bonus.
+- 💥 Slice multiple enemies in a _single_ dash for a big bonus.
 - 💎 Enemies drop shards - collect them to level up and pick **1 of 3 upgrades** for that run.
-- ⚠️ **Spiked enemies** (red, spikes extended) will hurt *you* if you dash into them - wait for them to retract.
+- ⚠️ **Spiked enemies** (red, spikes extended) will hurt _you_ if you dash into them - wait for them to retract.
 - 🌊 A **swarm** arrives every 30 seconds, and both spawn rate and enemy speed climb the longer you survive.
 - 📅 **Daily Run** - a date-seeded run so everyone gets the same opening layout each day. Beat it, then share a screenshot of your result to flex.
 - 🎨 **5 unlockable skins**, earned through lifetime milestones (total kills, best combo, survival time, daily runs completed).
