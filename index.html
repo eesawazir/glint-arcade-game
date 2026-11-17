@@ -477,6 +477,26 @@
       #share .row .btn {
         background: rgba(30, 36, 62, 0.82);
       }
+      #binstall {
+        width: 100%;
+      }
+      #binstall[hidden] {
+        display: none;
+      }
+      .steps {
+        width: 100%;
+        padding-left: 1.4em;
+        color: var(--dim);
+        font-size: 15px;
+        line-height: 1.5;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .steps b {
+        color: var(--tx);
+        font-weight: 500;
+      }
       #unl:empty,
       #nextu:empty {
         display: none;
@@ -887,6 +907,7 @@
             ><button class="tog" id="tmus">MUSIC</button
             ><button class="tog" id="tshk">SHAKE</button>
           </div>
+          <button class="tog" id="binstall" hidden>INSTALL APP</button>
           <p class="keys">
             Touch: swipe or tap &nbsp;·&nbsp; Mouse: click where to dash<br />Keys:
             WASD / arrows &nbsp;·&nbsp; P or Esc to pause
@@ -974,6 +995,20 @@
           ><button class="btn" id="shsave">SAVE IMAGE</button>
         </div>
         <button class="btn pri" id="shclose">DONE</button>
+      </div>
+    </div>
+
+    <div class="screen dimmed" id="install">
+      <div class="card">
+        <h2>INSTALL</h2>
+        <ol class="steps">
+          <li>
+            Tap <b>Share</b> in Safari (it may be under the <b>•••</b> menu).
+          </li>
+          <li>Scroll down and tap <b>Add to Home Screen</b>.</li>
+          <li>Tap <b>Add</b>. GLINT opens full screen and works offline.</li>
+        </ol>
+        <button class="btn pri" id="iclose">DONE</button>
       </div>
     </div>
 
@@ -3068,6 +3103,58 @@
           $("shsave").textContent = "SAVED ✓";
         };
 
+        /* ---------- install ---------- */
+        // Chrome/Edge/Samsung fire "beforeinstallprompt" when the game can be installed:
+        // keep the event and show our own Install button instead of the browser's banner.
+        // iPhone/iPad have no install API, so the button shows Add to Home Screen steps.
+        let installEvt = null,
+          instOpen = false;
+        const isIOS =
+          /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        const installed = () =>
+          matchMedia("(display-mode: standalone)").matches ||
+          navigator.standalone === true;
+        function syncInstall() {
+          $("binstall").hidden = installed() || !(installEvt || isIOS);
+        }
+        window.addEventListener("beforeinstallprompt", (e) => {
+          e.preventDefault();
+          installEvt = e;
+          syncInstall();
+        });
+        window.addEventListener("appinstalled", () => {
+          installEvt = null;
+          $("binstall").hidden = true;
+        });
+        function closeInstall() {
+          instOpen = false;
+          $("install").classList.remove("show");
+          $("menu").classList.add("show");
+        }
+        $("binstall").onclick = () => {
+          sfx.ui();
+          if (installEvt) {
+            installEvt.prompt();
+            installEvt.userChoice.finally(() => {
+              installEvt = null;
+              syncInstall();
+            });
+          } else if (isIOS) {
+            instOpen = true;
+            $("menu").classList.remove("show");
+            $("install").classList.add("show");
+          }
+        };
+        $("iclose").onclick = () => {
+          sfx.ui();
+          closeInstall();
+        };
+        $("install").addEventListener("click", (e) => {
+          if (e.target === $("install")) closeInstall();
+        });
+        syncInstall();
+
         /* ---------- input ---------- */
         const ptr = { id: null, ox: 0, oy: 0, t: 0, used: false };
         cv.addEventListener("pointerdown", (e) => {
@@ -3177,10 +3264,11 @@
             return;
           }
           if (e.repeat) return;
-          if (shareOpen) {
+          if (shareOpen || instOpen) {
             if (c === "Escape") {
               e.preventDefault();
-              closeSheet();
+              if (shareOpen) closeSheet();
+              else closeInstall();
             }
             return;
           }

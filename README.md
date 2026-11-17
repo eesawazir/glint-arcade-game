@@ -46,6 +46,33 @@ No login. No download. No ads. No energy timers. Just open it and go.
 
 ---
 
+## 📲 Install it
+
+GLINT can be installed like an app: it gets its own home-screen icon, opens full screen, and works offline. Open the [game](https://eesawazir.github.io/glint-arcade-game/) first, then:
+
+**Android (Chrome, Edge, Samsung Internet)**
+
+1. Tap **Install App** on the game's menu, or open the browser menu (**⋮**).
+2. Tap **Install app** (or **Add to Home screen**), then **Install**.
+
+**iPhone / iPad (Safari)**
+
+1. Tap the **Share** button (in newer iOS versions it may be under the **•••** menu).
+2. Scroll down and tap **Add to Home Screen**, then **Add**.
+
+**Windows / macOS / Linux (Chrome, Edge)**
+
+1. Click **Install App** on the game's menu, or the install icon at the right of the address bar.
+2. Click **Install**. GLINT opens in its own window and appears with your other apps.
+
+**Mac (Safari)**
+
+1. Choose **File → Add to Dock**.
+
+To remove it, uninstall it like any other app (long-press the icon on a phone).
+
+---
+
 ## 🕹️ Controls
 
 | Device             | Input                                             |
