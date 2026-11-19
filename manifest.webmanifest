@@ -1,6 +1,6 @@
 {
-  "name": "GLINT",
-  "short_name": "GLINT",
+  "name": "Glint",
+  "short_name": "Glint",
   "description": "Dash through them. Never stand still. One swipe is the whole game.",
   "start_url": "./index.html",
   "scope": "./",
